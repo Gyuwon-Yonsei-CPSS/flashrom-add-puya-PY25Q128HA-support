@@ -1,0 +1,1 @@
+# flashrom-add-puya-PY25Q128HA-support
