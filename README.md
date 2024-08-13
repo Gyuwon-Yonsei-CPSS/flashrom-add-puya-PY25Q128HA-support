@@ -5,15 +5,15 @@ This repository includes the necessary modifications to add support for the Puya
 ## Definitions and Configuration
 
 To support the Puya PY25Q128HA, you need to add the following definitions to the header files:
-
+```
 #define PUYA_ID 0x85
 #define PUYA_PY25Q128HA 0x2018
 #define FEATURE_4BA_SUPPORT (1 << 3)
 These define the manufacturer ID, the chip ID, and the support for 4-byte addressing, which is essential for handling the memory correctly.
+```
 
 Code Addition to flashchips.c
 In the flashchips.c file, the following code block should be added to include support for the Puya PY25Q128HA chip:
-
 ```` 
 {
     .vendor         = "Puya",
