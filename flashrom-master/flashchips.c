@@ -24,7 +24,7 @@
 
 #define PUYA_ID 0x85
 #define PUYA_PY25Q128HA 0x2018
-#define FEATURE_4BA_SUPPORT (1 << 3) // 4바이트 주소 지원 플래그
+#define FEATURE_4BA_SUPPORT (1 << 3)
 
 
 /**
@@ -62,27 +62,30 @@ const struct flashchip flashchips[] = {
 	 */
 
 	{
-    	.vendor = "Puya",
-    	.name = "PY25Q128HA",
-    	.bustype = BUS_SPI,
-    	.manufacture_id = PUYA_ID,  // 제조사 ID 0x85
-    	.model_id = PUYA_PY25Q128HA, // 모델 ID 0x2018
-    	.total_size = 16384, // 128 Mbit = 16 MByte
-    	.page_size = 256, // 페이지 크기 256 bytes
-    	.feature_bits = FEATURE_WRSR_WREN | FEATURE_4BA_SUPPORT,
-    	.tested = TEST_OK_PREW,
-    	.block_erasers = {
-        	{
-            	.eraseblocks = { {4 * 1024, 4096 } }, // 4KB block
-            	.block_erase = spi_block_erase_20,
-        	}, {
-            	.eraseblocks = { {64 * 1024, 256 } }, // 64KB block
-            	.block_erase = spi_block_erase_d8,
-        	}
-    	},
-    	.write = spi_chip_write_256, // 256바이트 페이지 쓰기
-    	.read = spi_chip_read, // 기본적인 읽기
-    	.voltage = {2700, 3600}, // 전압 범위 2.7V-3.6V
+		.vendor         = "Puya",
+		.name           = "PY25Q128HA",
+		.bustype        = BUS_SPI,
+		.manufacture_id = PUYA_ID,  //  ID 0x85
+		.model_id       = PUYA_PY25Q128HA, // ID 0x2018
+		.total_size     = 16384, // 128 Mbit = 16 MByte
+		.page_size      = 256, // 256 bytes
+		.feature_bits   = FEATURE_WRSR_WREN | FEATURE_4BA_SUPPORT,
+		.tested         = TEST_OK_PREW,
+		.block_erasers  = {
+			{
+				.eraseblocks = { {4 * 1024, 4096 } }, // 4KB block
+				.block_erase = SPI_BLOCK_ERASE_20,   // Command 0x20 for 4KB Sector Erase
+			}, {
+				.eraseblocks = { {32 * 1024, 512 } }, // 32KB block
+				.block_erase = SPI_BLOCK_ERASE_52,   // Command 0x52 for 32KB Block Erase
+			}, {
+				.eraseblocks = { {64 * 1024, 256 } }, // 64KB block
+				.block_erase = SPI_BLOCK_ERASE_D8,   // Command 0xD8 for 64KB Block Erase
+			}
+		},
+		.write          = SPI_CHIP_WRITE256,  // 256
+		.read           = SPI_CHIP_READ,      
+		.voltage        = {2700, 3600},        // 2.7V-3.6V
 	},
 
 	{
