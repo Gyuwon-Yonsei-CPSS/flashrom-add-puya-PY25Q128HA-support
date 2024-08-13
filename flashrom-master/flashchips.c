@@ -83,6 +83,8 @@ const struct flashchip flashchips[] = {
 				.block_erase = SPI_BLOCK_ERASE_D8,   // Command 0xD8 for 64KB Block Erase
 			}
 		},
+		.printlock	= SPI_PRETTYPRINT_STATUS_REGISTER_BP4_SRWD,
+		.unlock		= SPI_DISABLE_BLOCKPROTECT_BP4_SRWD,		
 		.write          = SPI_CHIP_WRITE256,  // 256
 		.read           = SPI_CHIP_READ,      
 		.voltage        = {2700, 3600},        // 2.7V-3.6V
