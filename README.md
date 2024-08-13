@@ -9,10 +9,12 @@ To support the Puya PY25Q128HA, you need to add the following definitions to the
 #define PUYA_ID 0x85
 #define PUYA_PY25Q128HA 0x2018
 #define FEATURE_4BA_SUPPORT (1 << 3)
-These define the manufacturer ID, the chip ID, and the support for 4-byte addressing, which is essential for handling the memory correctly.
 ```
 
-Code Addition to flashchips.c
+These define the manufacturer ID, the chip ID, and the support for 4-byte addressing, which is essential for handling the memory correctly.
+
+
+**Code Addition to flashchips.c**
 In the flashchips.c file, the following code block should be added to include support for the Puya PY25Q128HA chip:
 ```` 
 {
@@ -42,6 +44,7 @@ In the flashchips.c file, the following code block should be added to include su
     .voltage        = {2700, 3600},        // Voltage range 2.7V-3.6V
 },
 ````
+
 
 ## Explanation of the Code
 Vendor and Name: Specifies that this configuration is for the "Puya" vendor and the "PY25Q128HA" model.
