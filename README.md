@@ -14,6 +14,7 @@ These define the manufacturer ID, the chip ID, and the support for 4-byte addres
 Code Addition to flashchips.c
 In the flashchips.c file, the following code block should be added to include support for the Puya PY25Q128HA chip:
 
+```` 
 {
     .vendor         = "Puya",
     .name           = "PY25Q128HA",
@@ -40,6 +41,7 @@ In the flashchips.c file, the following code block should be added to include su
     .read           = SPI_CHIP_READ,       // Basic read function
     .voltage        = {2700, 3600},        // Voltage range 2.7V-3.6V
 },
+````
 
 ## Explanation of the Code
 Vendor and Name: Specifies that this configuration is for the "Puya" vendor and the "PY25Q128HA" model.
