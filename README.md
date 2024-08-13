@@ -2,6 +2,7 @@
 
 This repository includes the necessary modifications to add support for the Puya PY25Q128HA 128Mbit SPI Flash memory to the `flashrom-master` project. The changes involve updating the `flashchips.c` file with the appropriate definitions and configurations for this specific flash memory chip.
 
+
 ## Definitions and Configuration
 
 To support the Puya PY25Q128HA, you need to add the following definitions to the header files:
@@ -48,19 +49,30 @@ In the flashchips.c file, the following code block should be added to include su
 
 ## Explanation of the Code
 Vendor and Name: Specifies that this configuration is for the "Puya" vendor and the "PY25Q128HA" model.
+
 Bus Type: This chip uses the SPI bus (BUS_SPI).
+
 Manufacturer and Model ID: The unique identifiers for the chip (PUYA_ID and PUYA_PY25Q128HA).
-Memory Configuration:
+
+## Memory Configuration
 total_size: Total memory size of 128Mbit (16MByte).
+
 page_size: Page size of 256 bytes, which is the basic unit of programming.
+
 Feature Bits: Includes write enable and 4-byte addressing support.
+
 Block Erasers: Defines the erase commands for 4KB, 32KB, and 64KB blocks, which are standard for this type of flash memory.
+
 Read and Write Functions: Standard functions used for reading and writing to the chip.
+
 Voltage Range: The operating voltage range for the chip is 2.7V to 3.6V.
+
 Conclusion
 These changes enable flashrom to properly interact with the Puya PY25Q128HA chip, allowing for operations such as reading, writing, and erasing flash memory on devices using this chip.
 
 ##Additional Notes
 Ensure that all necessary headers are correctly included in the flashchips.c file for the definitions and functions used.
+
 Test the modified flashrom thoroughly on a device with the Puya PY25Q128HA chip to ensure all operations work as expected.
+
 This information should help anyone interested in adding support for the Puya PY25Q128HA chip to flashrom.
