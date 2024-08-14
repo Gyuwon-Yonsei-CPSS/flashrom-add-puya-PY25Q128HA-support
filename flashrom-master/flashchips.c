@@ -65,30 +65,32 @@ const struct flashchip flashchips[] = {
 		.vendor         = "Puya",
 		.name           = "PY25Q128HA",
 		.bustype        = BUS_SPI,
-		.manufacture_id = PUYA_ID,  //  ID 0x85
-		.model_id       = PUYA_PY25Q128HA, // ID 0x2018
-		.total_size     = 16384, // 128 Mbit = 16 MByte
-		.page_size      = 256, // 256 bytes
-		.feature_bits   = FEATURE_WRSR_WREN | FEATURE_4BA_SUPPORT,
-		.tested         = TEST_OK_PREW,
+		.manufacture_id = PUYA_ID,  // Manufacturer ID 0x85
+		.model_id       = PUYA_PY25Q128HA, // Model ID 0x2018
+		.total_size     = 16384, // Total size of 128 Mbit = 16 MByte
+		.page_size      = 256, // Page size of 256 bytes
+		.feature_bits   = FEATURE_WRSR_WREN | FEATURE_4BA_SUPPORT, // Enable Write Status Register and 4-Byte Addressing support
+		.tested         = TEST_OK_PREW, // Tested and verified to work
 		.block_erasers  = {
 			{
-				.eraseblocks = { {4 * 1024, 4096 } }, // 4KB block
+				.eraseblocks = { {4 * 1024, 4096 } }, // 4KB block size, 4096 blocks
 				.block_erase = SPI_BLOCK_ERASE_20,   // Command 0x20 for 4KB Sector Erase
 			}, {
-				.eraseblocks = { {32 * 1024, 512 } }, // 32KB block
+				.eraseblocks = { {32 * 1024, 512 } }, // 32KB block size, 512 blocks
 				.block_erase = SPI_BLOCK_ERASE_52,   // Command 0x52 for 32KB Block Erase
 			}, {
-				.eraseblocks = { {64 * 1024, 256 } }, // 64KB block
+				.eraseblocks = { {64 * 1024, 256 } }, // 64KB block size, 256 blocks
 				.block_erase = SPI_BLOCK_ERASE_D8,   // Command 0xD8 for 64KB Block Erase
 			}
 		},
-		.printlock	= SPI_PRETTYPRINT_STATUS_REGISTER_BP4_SRWD,
-		.unlock		= SPI_DISABLE_BLOCKPROTECT_BP4_SRWD,		
-		.write          = SPI_CHIP_WRITE256,  // 256
-		.read           = SPI_CHIP_READ,      
-		.voltage        = {2700, 3600},        // 2.7V-3.6V
+		.printlock = spi_prettyprint_status_register_default, // Default status register interpretation function
+		.unlock = spi_disable_blockprotect_bp, // Function to disable block protection, including SRWD bit
+		
+		.write          = SPI_CHIP_WRITE256,  // Function to write 256 bytes per page
+		.read           = SPI_CHIP_READ,      // Basic function to read data from the chip
+		.voltage        = {2700, 3600},        // Operating voltage range: 2.7V-3.6V
 	},
+
 
 	{
 		.vendor		= "AMD",
