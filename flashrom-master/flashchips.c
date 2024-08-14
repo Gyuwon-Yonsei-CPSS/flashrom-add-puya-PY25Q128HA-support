@@ -83,14 +83,12 @@ const struct flashchip flashchips[] = {
 				.block_erase = SPI_BLOCK_ERASE_D8,   // Command 0xD8 for 64KB Block Erase
 			}
 		},
-		.printlock = spi_prettyprint_status_register_default, // Default status register interpretation function
-		.unlock = spi_disable_blockprotect_bp, // Function to disable block protection, including SRWD bit
-		
+		.printlock = SPI_PRETTYPRINT_STATUS_REGISTER_DEFAULT, // Default status register interpretation function
+		.unlock = SPI_DISABLE_BLOCKPROTECT_BP, // Function to disable block protection, including SRWD bit
 		.write          = SPI_CHIP_WRITE256,  // Function to write 256 bytes per page
 		.read           = SPI_CHIP_READ,      // Basic function to read data from the chip
 		.voltage        = {2700, 3600},        // Operating voltage range: 2.7V-3.6V
 	},
-
 
 	{
 		.vendor		= "AMD",
