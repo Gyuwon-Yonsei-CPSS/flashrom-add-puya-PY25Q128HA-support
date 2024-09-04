@@ -19,42 +19,33 @@ These define the manufacturer ID, the chip ID, and the support for 4-byte addres
 In the flashchips.c file, the following code block should be added to include support for the Puya PY25Q128HA chip:
 ```` 
 {
-    .vendor         = "Puya",
-    .name           = "PY25Q128HA",
-    .bustype        = BUS_SPI,
-    .manufacture_id = PUYA_ID,  // Manufacturer ID 0x85
-    .model_id       = PUYA_PY25Q128HA, // Model ID 0x2018
-    .total_size     = 16384, // Total size of 128 Mbit = 16 MByte
-    .page_size      = 256, // Page size of 256 bytes
-    .feature_bits   = FEATURE_WRSR_WREN | FEATURE_4BA_SUPPORT, // Enable Write Status Register and 4-Byte Addressing support
-    .tested         = TEST_OK_PREW, // Tested and verified to work
-    .block_erasers  = {
-        {
-            .eraseblocks = { {4 * 1024, 4096 } }, // 4KB block size, 4096 blocks
-            .block_erase = SPI_BLOCK_ERASE_20,   // Command 0x20 for 4KB Sector Erase
-        }, {
-            .eraseblocks = { {32 * 1024, 512 } }, // 32KB block size, 512 blocks
-            .block_erase = SPI_BLOCK_ERASE_52,   // Command 0x52 for 32KB Block Erase
-        }, {
-            .eraseblocks = { {64 * 1024, 256 } }, // 64KB block size, 256 blocks
-            .block_erase = SPI_BLOCK_ERASE_D8,   // Command 0xD8 for 64KB Block Erase
-        }
-    },
-    // 메모리 보호를 비활성화하기 위한 새로운 unlock 함수
-    .unlock = {
-        .write_enable = WREN, // Write Enable Latch 비트 설정
-        .write_status_register = WRSR, // 상태 레지스터에 접근하여 BP 및 SRP 비트를 해제
-        .disable_block_protection = {
-            // BP 및 SRP 비트를 비활성화하는 추가 명령어
-            .clear_protect_bits = SPI_CLEAR_BLOCK_PROTECTION_BP4_SRWD,
-            .srp_disable = SPI_DISABLE_SRP
-        }
-    },
-    .printlock = SPI_PRETTYPRINT_STATUS_REGISTER_BP4_SRWD, // 상태 레지스터의 BP, SRP 비트 출력
-    .write = SPI_CHIP_WRITE256,  // 256바이트 쓰기
-    .read = SPI_CHIP_READ,      // 펌웨어 읽기
-    .voltage = {2700, 3600},    // 동작 전압
-}
+		.vendor         = "Puya",
+		.name           = "PY25Q128HA",
+		.bustype        = BUS_SPI,
+		.manufacture_id = PUYA_ID,  // Manufacturer ID 0x85
+		.model_id       = PUYA_PY25Q128HA, // Model ID 0x2018
+		.total_size     = 16384, // Total size of 128 Mbit = 16 MByte
+		.page_size      = 256, // Page size of 256 bytes
+		.feature_bits   = FEATURE_WRSR_WREN | FEATURE_4BA_SUPPORT, // Enable Write Status Register and 4-Byte Addressing support
+		.tested         = TEST_OK_PREW, // Tested and verified to work
+		.block_erasers  = {
+			{
+				.eraseblocks = { {4 * 1024, 4096 } }, // 4KB block size, 4096 blocks
+				.block_erase = SPI_BLOCK_ERASE_20,   // Command 0x20 for 4KB Sector Erase
+			}, {
+				.eraseblocks = { {32 * 1024, 512 } }, // 32KB block size, 512 blocks
+				.block_erase = SPI_BLOCK_ERASE_52,   // Command 0x52 for 32KB Block Erase
+			}, {
+				.eraseblocks = { {64 * 1024, 256 } }, // 64KB block size, 256 blocks
+				.block_erase = SPI_BLOCK_ERASE_D8,   // Command 0xD8 for 64KB Block Erase
+			}
+		},
+   		.printlock = SPI_PRETTYPRINT_STATUS_REGISTER_BP4_SRWD, // Interpret status register to show BP and SRP bits
+    	.unlock = SPI_DISABLE_BLOCKPROTECT_BP4_SRWD, // Function to disable block protection by clearing BP bits and handling SRP
+		.write          = SPI_CHIP_WRITE256,  // Function to write 256 bytes per page
+		.read           = SPI_CHIP_READ,      // Basic function to read data from the chip
+		.voltage        = {2700, 3600},        // Operating voltage range: 2.7V-3.6V
+	},
 ````
 
 
